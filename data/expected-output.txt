@@ -1,0 +1,11 @@
+{ "status": "OK", "message": "Account created: ACC001" }
+{ "status": "OK", "message": "Account created: ACC002" }
+{ "status": "OK", "message": "Account created: ACC003" }
+{ "status": "OK", "message": "Account found: ACC001", "name": "Alice Johnson", "balance": "0000050000.00" }
+{ "status": "NOT_FOUND", "message": "Account not found: ACC999" }
+{ "status": "OK", "account": "ACC001", "score": 425, "message": "Score calculated" }
+{ "status": "OK", "account": "ACC002", "score": 400, "message": "Score calculated" }
+{ "status": "OK", "account": "ACC003", "score": 325, "message": "Score calculated" }
+{ "status": "OK", "account": "ACC004", "score": 300, "message": "Score calculated" }
+{ "status": "ERROR", "message": "Account already exists: ACC001" }
+{ "status": "ERROR", "message": "Unknown operation: INVALID_OP" }
