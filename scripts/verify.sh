@@ -4,16 +4,17 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 
-BIN="$PROJECT_DIR/bin/legacy-backend"
+BIN_DIR="$PROJECT_DIR/bin"
+CLASS="LegacyBackend"
 INPUT="$PROJECT_DIR/data/input.dat"
 EXPECTED="$PROJECT_DIR/data/expected-output.txt"
 
-if [ ! -f "$BIN" ]; then
-    echo "Binary not found. Run ./scripts/build.sh first."
+if [ ! -f "$BIN_DIR/$CLASS.class" ]; then
+    echo "Class file not found. Run ./scripts/build.sh first."
     exit 1
 fi
 
-ACTUAL=$("$BIN" "$INPUT")
+ACTUAL=$(java -cp "$BIN_DIR" "$CLASS" "$INPUT")
 EXPECTED_CONTENT=$(cat "$EXPECTED")
 
 if [ "$ACTUAL" = "$EXPECTED_CONTENT" ]; then
