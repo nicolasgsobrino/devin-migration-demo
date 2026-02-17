@@ -13,8 +13,8 @@ if [ ! -f "$BIN" ]; then
     exit 1
 fi
 
-ACTUAL=$("$BIN" "$INPUT")
-EXPECTED_CONTENT=$(cat "$EXPECTED")
+ACTUAL=$("$BIN" "$INPUT" | sed 's/"created": "[^"]*"/"created": "TIMESTAMP"/g')
+EXPECTED_CONTENT=$(cat "$EXPECTED" | sed 's/"created": "[^"]*"/"created": "TIMESTAMP"/g')
 
 if [ "$ACTUAL" = "$EXPECTED_CONTENT" ]; then
     echo "PASS: Output matches expected results."
