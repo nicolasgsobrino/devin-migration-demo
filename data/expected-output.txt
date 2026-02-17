@@ -1,11 +1,43 @@
-{ "status": "OK", "message": "Account created: ACC001" }
-{ "status": "OK", "message": "Account created: ACC002" }
-{ "status": "OK", "message": "Account created: ACC003" }
-{ "status": "OK", "message": "Account found: ACC001", "name": "Alice Johnson", "balance": "0000050000.00" }
+{ "status": "OK", "message": "Account created", "account_id": "ACC001", "name": "Alice Johnson", "type": "CHECKING", "balance": 50000.00 }
+{ "status": "OK", "message": "Account created", "account_id": "ACC002", "name": "Bob Smith", "type": "SAVINGS", "balance": 120000.00 }
+{ "status": "OK", "message": "Account created", "account_id": "ACC003", "name": "Carol White", "type": "CHECKING", "balance": 0.00 }
+{ "status": "OK", "message": "Account found", "account_id": "ACC001", "name": "Alice Johnson", "type": "CHECKING", "balance": 50000.00, "active": 1, "created": "2026-02-17T16:35:33Z" }
 { "status": "NOT_FOUND", "message": "Account not found: ACC999" }
+{ "status": "OK", "message": "Deposit successful", "account_id": "ACC003", "deposited": 5000.00, "new_balance": 5000.00 }
+{ "status": "OK", "message": "Deposit successful", "account_id": "ACC001", "deposited": 10000.00, "new_balance": 60000.00 }
+{ "status": "OK", "message": "Withdrawal successful", "account_id": "ACC001", "withdrawn": 2000.00, "new_balance": 58000.00 }
+{ "status": "ERROR", "message": "Insufficient funds" }
+{ "status": "OK", "message": "Transfer successful", "from": "ACC001", "to": "ACC002", "amount": 5000.00 }
+{ "status": "OK", "message": "Account updated", "account_id": "ACC003", "name": "Carol Williams" }
+{ "status": "OK", "accounts": [
+{ "account_id": "ACC001", "name": "Alice Johnson", "type": "CHECKING", "balance": 53000.00 }
+, { "account_id": "ACC002", "name": "Bob Smith", "type": "SAVINGS", "balance": 125000.00 }
+, { "account_id": "ACC003", "name": "Carol Williams", "type": "CHECKING", "balance": 5000.00 }
+], "count": 003 }
+{ "status": "OK", "message": "Loan created", "loan_id": "LOAN001", "account_id": "ACC001", "principal": 10000.00, "rate": 05.00, "term_months": 012, "monthly_payment": 856.07 }
+{ "status": "OK", "message": "Loan created", "loan_id": "LOAN002", "account_id": "ACC002", "principal": 50000.00, "rate": 07.50, "term_months": 024, "monthly_payment": 2249.97 }
+{ "status": "OK", "message": "Payment successful", "loan_id": "LOAN001", "paid": 1000.00, "remaining": 9000.00, "loan_status": "ACTIVE" }
+{ "status": "OK", "loan_id": "LOAN001", "account_id": "ACC001", "principal": 10000.00, "rate": 05.00, "term_months": 012, "remaining": 9000.00, "status": "ACTIVE" }
+{ "status": "OK", "loans": [
+{ "loan_id": "LOAN001", "account_id": "ACC001", "principal": 10000.00, "remaining": 9000.00, "status": "ACTIVE" }
+, { "loan_id": "LOAN002", "account_id": "ACC002", "principal": 50000.00, "remaining": 50000.00, "status": "ACTIVE" }
+], "count": 002 }
 { "status": "OK", "account": "ACC001", "score": 425, "message": "Score calculated" }
 { "status": "OK", "account": "ACC002", "score": 400, "message": "Score calculated" }
 { "status": "OK", "account": "ACC003", "score": 325, "message": "Score calculated" }
-{ "status": "OK", "account": "ACC004", "score": 300, "message": "Score calculated" }
+{ "status": "OK", "account_id": "ACC001", "transactions": [
+{ "txn_id": 00001, "type": "INITIAL_DEPOSIT", "amount": 50000.00, "balance_after": 50000.00, "description": "Account opening deposit" }
+, { "txn_id": 00004, "type": "DEPOSIT", "amount": 10000.00, "balance_after": 60000.00, "description": "Cash deposit" }
+, { "txn_id": 00005, "type": "WITHDRAWAL", "amount": 2000.00, "balance_after": 58000.00, "description": "Cash withdrawal" }
+, { "txn_id": 00006, "type": "TRANSFER_OUT", "amount": 5000.00, "balance_after": 53000.00, "description": "Transfer to ACC002" }
+, { "txn_id": 00008, "type": "LOAN_DISBURSEMENT", "amount": 10000.00, "balance_after": 63000.00, "description": "Loan disbursement: LOAN001" }
+, { "txn_id": 00010, "type": "LOAN_PAYMENT", "amount": 1000.00, "balance_after": 62000.00, "description": "Loan payment: LOAN001" }
+], "count": 006 }
+{ "status": "OK", "active_accounts": 003, "total_balance": 242000.00, "active_loans": 002, "total_loan_balance": 59000.00, "total_transactions": 00010 }
+{ "status": "OK", "message": "Account deleted: ACC003" }
+{ "status": "OK", "accounts": [
+{ "account_id": "ACC001", "name": "Alice Johnson", "type": "CHECKING", "balance": 62000.00 }
+, { "account_id": "ACC002", "name": "Bob Smith", "type": "SAVINGS", "balance": 175000.00 }
+], "count": 002 }
 { "status": "ERROR", "message": "Account already exists: ACC001" }
 { "status": "ERROR", "message": "Unknown operation: INVALID_OP" }
