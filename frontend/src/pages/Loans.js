@@ -27,38 +27,38 @@ function AmortizationChart({ principal, rate, termMonths }) {
     { name: 'Principal', value: Math.round(p) },
     { name: 'Interest', value: Math.round(totalInterest) }
   ];
-  const COLORS = ['#3ea6ff', '#ff6b6b'];
+  const COLORS = ['#191c1f', '#e8e8e8'];
 
   return (
     <div>
-      <div style={{marginBottom:'16px'}}>
-        <div className="detail-row"><span className="detail-label">Monthly Payment</span><span className="detail-value" style={{color:'var(--accent)',fontWeight:700,fontSize:'16px'}}>${payment.toFixed(2)}</span></div>
+      <div style={{marginBottom:'20px'}}>
+        <div className="detail-row"><span className="detail-label">Monthly Payment</span><span className="detail-value" style={{fontSize:'18px',fontWeight:800}}>${payment.toFixed(2)}</span></div>
         <div className="detail-row"><span className="detail-label">Total Interest</span><span className="detail-value amount-negative">${totalInterest.toFixed(2)}</span></div>
         <div className="detail-row"><span className="detail-label">Total Cost</span><span className="detail-value">${(p + totalInterest).toFixed(2)}</span></div>
       </div>
 
       <div className="grid-2">
         <div>
-          <h4 style={{fontSize:'13px',color:'var(--text-muted)',marginBottom:'8px'}}>Payment Breakdown</h4>
+          <h4 style={{fontSize:'13px',color:'var(--text-muted)',marginBottom:'10px',fontWeight:600}}>Payment Breakdown</h4>
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={data}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#333" />
-              <XAxis dataKey="month" tick={{fill:'#717171',fontSize:10}} />
-              <YAxis tick={{fill:'#717171',fontSize:10}} />
-              <Tooltip contentStyle={{background:'#1a1a1a',border:'1px solid #333',borderRadius:'8px',color:'#f1f1f1'}} />
-              <Bar dataKey="principal" stackId="a" fill="#3ea6ff" name="Principal" />
-              <Bar dataKey="interest" stackId="a" fill="#ff6b6b" name="Interest" />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e8e8e8" />
+              <XAxis dataKey="month" tick={{fill:'#999',fontSize:10}} />
+              <YAxis tick={{fill:'#999',fontSize:10}} />
+              <Tooltip contentStyle={{background:'#fff',border:'1px solid #e8e8e8',borderRadius:'12px',color:'#191c1f',boxShadow:'0 4px 12px rgba(0,0,0,.08)'}} />
+              <Bar dataKey="principal" stackId="a" fill="#191c1f" name="Principal" radius={[0,0,0,0]} />
+              <Bar dataKey="interest" stackId="a" fill="#e8e8e8" name="Interest" radius={[4,4,0,0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
         <div>
-          <h4 style={{fontSize:'13px',color:'var(--text-muted)',marginBottom:'8px'}}>Principal vs Interest</h4>
+          <h4 style={{fontSize:'13px',color:'var(--text-muted)',marginBottom:'10px',fontWeight:600}}>Principal vs Interest</h4>
           <ResponsiveContainer width="100%" height={200}>
             <PieChart>
               <Pie data={pieData} cx="50%" cy="50%" outerRadius={70} dataKey="value" label={({name, percent}) => `${name} ${(percent*100).toFixed(0)}%`}>
                 {pieData.map((_, index) => <Cell key={index} fill={COLORS[index]} />)}
               </Pie>
-              <Tooltip contentStyle={{background:'#1a1a1a',border:'1px solid #333',borderRadius:'8px',color:'#f1f1f1'}} />
+              <Tooltip contentStyle={{background:'#fff',border:'1px solid #e8e8e8',borderRadius:'12px',color:'#191c1f'}} />
             </PieChart>
           </ResponsiveContainer>
         </div>
@@ -124,12 +124,12 @@ function CreateLoanModal({ onClose, onCreated }) {
           </div>
 
           {form.principal && form.rate && form.term_months && (
-            <div style={{marginBottom:'14px'}}>
+            <div style={{marginBottom:'16px'}}>
               <button type="button" className="btn btn-outline btn-sm" onClick={() => setShowPreview(!showPreview)}>
                 {showPreview ? 'Hide' : 'Preview'} Interest Breakdown
               </button>
               {showPreview && (
-                <div className="card" style={{marginTop:'12px'}}>
+                <div className="card" style={{marginTop:'14px'}}>
                   <AmortizationChart principal={form.principal} rate={form.rate} termMonths={form.term_months} />
                 </div>
               )}
@@ -173,12 +173,12 @@ function PayLoanModal({ loan, onClose, onPaid }) {
       <div className="modal" onClick={e => e.stopPropagation()}>
         <h3>Pay Loan: {loan.loan_id}</h3>
         {error && <div className="alert alert-error">{error}</div>}
-        <div style={{marginBottom:'16px'}}>
+        <div style={{marginBottom:'20px'}}>
           <div className="detail-row"><span className="detail-label">Account</span><span className="detail-value">{loan.account_id}</span></div>
           <div className="detail-row"><span className="detail-label">Principal</span><span className="detail-value">${fmt(loan.principal)}</span></div>
           <div className="detail-row"><span className="detail-label">Remaining</span><span className="detail-value amount-negative">${fmt(loan.remaining)}</span></div>
-          <div style={{marginTop:'10px'}}>
-            <div style={{display:'flex',justifyContent:'space-between',fontSize:'11px',color:'var(--text-muted)',marginBottom:'4px'}}>
+          <div style={{marginTop:'12px'}}>
+            <div style={{display:'flex',justifyContent:'space-between',fontSize:'12px',color:'var(--text-muted)',marginBottom:'6px'}}>
               <span>Paid: {paidPct.toFixed(1)}%</span>
               <span>${fmt(loan.principal - (loan.remaining || 0))} / ${fmt(loan.principal)}</span>
             </div>
@@ -217,14 +217,14 @@ function LoanDetail({ loan }) {
           <div className="detail-row"><span className="detail-label">Remaining</span><span className="detail-value amount-negative">${fmt(loan.remaining)}</span></div>
           <div className="detail-row"><span className="detail-label">Rate</span><span className="detail-value">{loan.rate || 'N/A'}%</span></div>
           <div className="detail-row"><span className="detail-label">Term</span><span className="detail-value">{loan.term_months || 'N/A'} months</span></div>
-          <div className="detail-row"><span className="detail-label">Monthly Payment</span><span className="detail-value" style={{color:'var(--accent)'}}>${fmt(loan.monthly_payment)}</span></div>
+          <div className="detail-row"><span className="detail-label">Monthly Payment</span><span className="detail-value" style={{fontWeight:800}}>${fmt(loan.monthly_payment)}</span></div>
           <div className="detail-row"><span className="detail-label">Status</span><span className="detail-value"><span className={'badge ' + (loan.status === 'PAID' ? 'badge-paid' : 'badge-active')}>{loan.status}</span></span></div>
         </div>
         <div>
-          <div style={{marginBottom:'12px'}}>
-            <div style={{display:'flex',justifyContent:'space-between',fontSize:'12px',color:'var(--text-muted)',marginBottom:'6px'}}>
+          <div style={{marginBottom:'16px'}}>
+            <div style={{display:'flex',justifyContent:'space-between',fontSize:'13px',color:'var(--text-muted)',marginBottom:'8px'}}>
               <span>Repayment Progress</span>
-              <span>{paidPct.toFixed(1)}%</span>
+              <span style={{fontWeight:700,color:'var(--text)'}}>{paidPct.toFixed(1)}%</span>
             </div>
             <div className="progress-bar" style={{height:'10px'}}>
               <div className="progress-fill green" style={{width: paidPct + '%'}}></div>
@@ -297,13 +297,13 @@ function Loans() {
                 const pct = loan.principal > 0 ? ((loan.principal - (loan.remaining || 0)) / loan.principal * 100) : 0;
                 return (
                   <tr key={i} style={{cursor:'pointer'}} onClick={() => setSelectedLoan(selectedLoan?.loan_id === loan.loan_id ? null : loan)}>
-                    <td><strong style={{color:'var(--accent)'}}>{loan.loan_id}</strong></td>
+                    <td><strong>{loan.loan_id}</strong></td>
                     <td>{loan.account_id}</td>
                     <td>${fmt(loan.principal)}</td>
                     <td className="amount-negative">${fmt(loan.remaining)}</td>
                     <td style={{width:'120px'}}>
                       <div className="progress-bar"><div className="progress-fill green" style={{width: Math.min(100, pct) + '%'}}></div></div>
-                      <div style={{fontSize:'10px',color:'var(--text-muted)',marginTop:'2px'}}>{pct.toFixed(0)}% paid</div>
+                      <div style={{fontSize:'11px',color:'var(--text-muted)',marginTop:'4px'}}>{pct.toFixed(0)}% paid</div>
                     </td>
                     <td><span className={'badge ' + (loan.status === 'PAID' ? 'badge-paid' : 'badge-active')}>{loan.status}</span></td>
                     <td>

@@ -100,16 +100,16 @@ function Reports() {
                   <div className={'score-circle ' + getScoreClass(scoreResult.score)}>
                     {scoreResult.score}
                   </div>
-                  <h3 style={{color:'var(--text-primary)',fontSize:'18px',fontWeight:600}}>{getScoreLabel(scoreResult.score)}</h3>
-                  <p style={{color:'var(--text-muted)',marginTop:'8px'}}>Account: {scoreResult.account}</p>
-                  <div style={{marginTop:'16px',display:'flex',gap:'24px'}}>
+                  <h3 style={{color:'var(--text)',fontSize:'20px',fontWeight:800}}>{getScoreLabel(scoreResult.score)}</h3>
+                  <p style={{color:'var(--text-muted)',marginTop:'8px',fontSize:'14px'}}>Account: {scoreResult.account}</p>
+                  <div style={{marginTop:'20px',display:'flex',gap:'32px'}}>
                     <div style={{textAlign:'center'}}>
-                      <div style={{fontSize:'11px',color:'var(--text-muted)',textTransform:'uppercase'}}>Score Range</div>
-                      <div style={{fontSize:'14px',fontWeight:600,color:'var(--text-primary)',marginTop:'4px'}}>300 - 850</div>
+                      <div style={{fontSize:'12px',color:'var(--text-muted)',textTransform:'uppercase',letterSpacing:'0.5px'}}>Score Range</div>
+                      <div style={{fontSize:'16px',fontWeight:700,color:'var(--text)',marginTop:'4px'}}>300 - 850</div>
                     </div>
                     <div style={{textAlign:'center'}}>
-                      <div style={{fontSize:'11px',color:'var(--text-muted)',textTransform:'uppercase'}}>Percentile</div>
-                      <div style={{fontSize:'14px',fontWeight:600,color:'var(--text-primary)',marginTop:'4px'}}>{Math.round((scoreResult.score - 300) / 550 * 100)}%</div>
+                      <div style={{fontSize:'12px',color:'var(--text-muted)',textTransform:'uppercase',letterSpacing:'0.5px'}}>Percentile</div>
+                      <div style={{fontSize:'16px',fontWeight:700,color:'var(--text)',marginTop:'4px'}}>{Math.round((scoreResult.score - 300) / 550 * 100)}%</div>
                     </div>
                   </div>
                 </div>
@@ -126,7 +126,7 @@ function Reports() {
           <div className="card">
             <div className="card-header"><h3>Transaction History</h3></div>
             <form onSubmit={handleTransactions}>
-              <div className="form-group" style={{maxWidth:'300px'}}>
+              <div className="form-group" style={{maxWidth:'320px'}}>
                 <label>Account ID</label>
                 <input ref={txnRef} required placeholder="e.g. ACC001" value={txnAccountId} onChange={e => setTxnAccountId(e.target.value.toUpperCase())} />
               </div>

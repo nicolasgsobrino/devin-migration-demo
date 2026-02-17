@@ -114,8 +114,8 @@ function AccountDetail({ accountId, onClose, onRefresh }) {
               <span className="detail-label">Client Name</span>
               <span className="detail-value">
                 {editing ? (
-                  <span style={{display:'flex',gap:'6px',alignItems:'center'}}>
-                    <input ref={nameInput} value={newName} onChange={e => setNewName(e.target.value)} onKeyDown={handleNameKeyDown} style={{padding:'6px 8px',background:'var(--bg-input)',border:'1px solid var(--accent)',borderRadius:'6px',color:'var(--text-primary)',fontSize:'13px',outline:'none',width:'180px'}} />
+                  <span style={{display:'flex',gap:'8px',alignItems:'center'}}>
+                    <input ref={nameInput} value={newName} onChange={e => setNewName(e.target.value)} onKeyDown={handleNameKeyDown} style={{padding:'8px 12px',background:'var(--bg-input)',border:'1.5px solid var(--text)',borderRadius:'var(--radius)',color:'var(--text)',fontSize:'14px',outline:'none',width:'200px'}} />
                     <button className="btn btn-primary btn-sm" onClick={handleUpdate}>Save</button>
                     <button className="btn btn-outline btn-sm" onClick={() => setEditing(false)}>Cancel</button>
                   </span>
@@ -133,8 +133,8 @@ function AccountDetail({ accountId, onClose, onRefresh }) {
             <div className="detail-row"><span className="detail-label">Created</span><span className="detail-value">{account.created}</span></div>
 
             {transactions.length > 0 && (
-              <div style={{marginTop:'16px'}}>
-                <h4 style={{fontSize:'14px',fontWeight:600,marginBottom:'10px',color:'var(--text-primary)'}}>Recent Transactions</h4>
+              <div style={{marginTop:'20px'}}>
+                <h4 style={{fontSize:'15px',fontWeight:700,marginBottom:'12px',color:'var(--text)'}}>Recent Transactions</h4>
                 <table>
                   <thead><tr><th>#</th><th>Type</th><th>Amount</th><th>Balance</th><th>Description</th></tr></thead>
                   <tbody>
@@ -207,9 +207,9 @@ function Accounts() {
 
       {alert && <div className={'alert alert-' + alert.type}>{alert.message}</div>}
 
-      <div style={{display:'flex',gap:'10px',marginBottom:'16px',alignItems:'center'}}>
+      <div style={{display:'flex',gap:'12px',marginBottom:'20px',alignItems:'center'}}>
         <div className="search-bar" style={{flex:1}}>
-          <span style={{color:'var(--text-muted)',fontSize:'14px'}}>&#128269;</span>
+          <span style={{color:'var(--text-muted)',fontSize:'16px'}}>&#128269;</span>
           <input placeholder="Search by ID, name, or type..." value={search} onChange={e => setSearch(e.target.value)} />
         </div>
         <button className="btn btn-primary" onClick={() => setShowCreate(true)}>+ New Account</button>
@@ -234,7 +234,7 @@ function Accounts() {
             <tbody>
               {filtered.map((acc, i) => (
                 <tr key={i} style={{cursor:'pointer'}} onClick={() => setSelectedAccount(acc.account_id)}>
-                  <td><strong style={{color:'var(--accent)'}}>{acc.account_id}</strong></td>
+                  <td><strong>{acc.account_id}</strong></td>
                   <td>{acc.name}</td>
                   <td><span className={'badge badge-' + (acc.type || '').toLowerCase()}>{acc.type}</span></td>
                   <td className="amount-positive">${fmt(acc.balance)}</td>
