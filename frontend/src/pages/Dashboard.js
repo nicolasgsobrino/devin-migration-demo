@@ -6,9 +6,7 @@ function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    loadDashboard();
-  }, []);
+  useEffect(() => { loadDashboard(); }, []);
 
   async function loadDashboard() {
     setLoading(true);
@@ -24,37 +22,35 @@ function Dashboard() {
   if (loading) return <div className="loading">Loading dashboard...</div>;
   if (error) return <div className="alert alert-error">{error}</div>;
 
+  const fmt = (v) => (v || 0).toLocaleString('en-US', { minimumFractionDigits: 2 });
+
   return (
     <div>
       <div className="page-header">
         <h2>Dashboard</h2>
-        <p>Overview of the banking system</p>
+        <p>Banking system overview</p>
       </div>
 
       <div className="stats-grid">
-        <div className="stat-card">
-          <div className="stat-value">{data?.active_accounts || 0}</div>
+        <div className="stat-card purple">
           <div className="stat-label">Active Accounts</div>
+          <div className="stat-value">{data?.active_accounts || 0}</div>
         </div>
-        <div className="stat-card accent">
-          <div className="stat-value">
-            ${(data?.total_balance || 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}
-          </div>
+        <div className="stat-card green">
           <div className="stat-label">Total Balance</div>
+          <div className="stat-value">${fmt(data?.total_balance)}</div>
         </div>
-        <div className="stat-card warning">
-          <div className="stat-value">{data?.active_loans || 0}</div>
+        <div className="stat-card yellow">
           <div className="stat-label">Active Loans</div>
+          <div className="stat-value">{data?.active_loans || 0}</div>
         </div>
-        <div className="stat-card danger">
-          <div className="stat-value">
-            ${(data?.total_loan_balance || 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}
-          </div>
+        <div className="stat-card red">
           <div className="stat-label">Total Loan Balance</div>
+          <div className="stat-value">${fmt(data?.total_loan_balance)}</div>
         </div>
-        <div className="stat-card success">
-          <div className="stat-value">{data?.total_transactions || 0}</div>
+        <div className="stat-card">
           <div className="stat-label">Total Transactions</div>
+          <div className="stat-value">{data?.total_transactions || 0}</div>
         </div>
       </div>
 
@@ -63,17 +59,12 @@ function Dashboard() {
           <h3>System Information</h3>
           <button className="btn btn-outline btn-sm" onClick={loadDashboard}>Refresh</button>
         </div>
-        <table>
-          <tbody>
-            <tr><td><strong>Backend</strong></td><td>GnuCOBOL 3.1</td></tr>
-            <tr><td><strong>API</strong></td><td>Python Flask</td></tr>
-            <tr><td><strong>Architecture</strong></td><td>COBOL Backend + REST API + React Frontend</td></tr>
-            <tr><td><strong>Operations Supported</strong></td><td>15 banking operations</td></tr>
-            <tr><td><strong>Max Accounts</strong></td><td>100</td></tr>
-            <tr><td><strong>Max Loans</strong></td><td>50</td></tr>
-            <tr><td><strong>Transaction Log</strong></td><td>500 entries</td></tr>
-          </tbody>
-        </table>
+        <div className="detail-row"><span className="detail-label">Backend</span><span className="detail-value">GnuCOBOL 3.1</span></div>
+        <div className="detail-row"><span className="detail-label">API</span><span className="detail-value">Python Flask</span></div>
+        <div className="detail-row"><span className="detail-label">Architecture</span><span className="detail-value">COBOL + REST API + React</span></div>
+        <div className="detail-row"><span className="detail-label">Operations</span><span className="detail-value">15 banking operations</span></div>
+        <div className="detail-row"><span className="detail-label">Max Accounts</span><span className="detail-value">100</span></div>
+        <div className="detail-row"><span className="detail-label">Max Loans</span><span className="detail-value">50</span></div>
       </div>
     </div>
   );

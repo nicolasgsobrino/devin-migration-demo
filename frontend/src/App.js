@@ -10,20 +10,37 @@ function Sidebar() {
   return (
     <div className="sidebar">
       <div className="sidebar-header">
-        <h1>COBOL Bank</h1>
-        <p>Legacy Banking System</p>
+        <div className="sidebar-logo">
+          <div className="sidebar-logo-icon">CB</div>
+          <div className="sidebar-logo-text">
+            <h1>COBOL Bank</h1>
+            <p>Banking Platform</p>
+          </div>
+        </div>
       </div>
       <nav className="sidebar-nav">
-        <div className="sidebar-section">General</div>
-        <NavLink to="/" end><span className="icon">&#x1F4CA;</span> Dashboard</NavLink>
+        <div className="sidebar-section">Overview</div>
+        <NavLink to="/" end className={({isActive}) => `nav-item ${isActive ? 'active' : ''}`}>
+          <span className="nav-icon">&#9632;</span> Dashboard
+        </NavLink>
         <div className="sidebar-section">Management</div>
-        <NavLink to="/accounts"><span className="icon">&#x1F465;</span> Clients</NavLink>
-        <div className="sidebar-section">Banking</div>
-        <NavLink to="/operations"><span className="icon">&#x1F4B1;</span> Operations</NavLink>
-        <NavLink to="/loans"><span className="icon">&#x1F3E6;</span> Loans</NavLink>
-        <div className="sidebar-section">Analytics</div>
-        <NavLink to="/reports"><span className="icon">&#x1F4C8;</span> Reports</NavLink>
+        <NavLink to="/accounts" className={({isActive}) => `nav-item ${isActive ? 'active' : ''}`}>
+          <span className="nav-icon">&#9679;</span> Clients
+        </NavLink>
+        <NavLink to="/operations" className={({isActive}) => `nav-item ${isActive ? 'active' : ''}`}>
+          <span className="nav-icon">&#8644;</span> Operations
+        </NavLink>
+        <div className="sidebar-section">Finance</div>
+        <NavLink to="/loans" className={({isActive}) => `nav-item ${isActive ? 'active' : ''}`}>
+          <span className="nav-icon">&#9733;</span> Loans
+        </NavLink>
+        <NavLink to="/reports" className={({isActive}) => `nav-item ${isActive ? 'active' : ''}`}>
+          <span className="nav-icon">&#9776;</span> Reports
+        </NavLink>
       </nav>
+      <div className="sidebar-footer">
+        COBOL Backend v2.0
+      </div>
     </div>
   );
 }
