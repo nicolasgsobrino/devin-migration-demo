@@ -11,19 +11,22 @@ import { FleetTable } from './components/tables/FleetTable';
 import { RegionMap } from './components/layout/RegionMap';
 import { Loading } from './components/layout/Loading';
 import { ErrorBanner } from './components/layout/ErrorBanner';
+import { IncidentGlobe } from './components/globe/IncidentGlobe';
+
+const POLL_INTERVAL = 5000;
 
 function App() {
   const [region, setRegion] = useState('');
   const [timeRange, setTimeRange] = useState('24h');
   const [transportType, setTransportType] = useState('');
 
-  const overview = useApi(() => fetchOverview(), []);
-  const deliveries = useApi(() => fetchDeliveries(region || undefined, transportType || undefined), [region, transportType]);
-  const incidents = useApi(() => fetchIncidents(region || undefined), [region]);
-  const infra = useApi(() => fetchInfrastructure(region || undefined), [region]);
-  const cost = useApi(() => fetchCost(region || undefined), [region]);
-  const insights = useApi(() => fetchInsights(), []);
-  const fleet = useApi(() => fetchFleet(region || undefined, transportType || undefined), [region, transportType]);
+  const overview = useApi(() => fetchOverview(), [], POLL_INTERVAL);
+  const deliveries = useApi(() => fetchDeliveries(region || undefined, transportType || undefined), [region, transportType], POLL_INTERVAL);
+  const incidents = useApi(() => fetchIncidents(region || undefined), [region], POLL_INTERVAL);
+  const infra = useApi(() => fetchInfrastructure(region || undefined), [region], POLL_INTERVAL);
+  const cost = useApi(() => fetchCost(region || undefined), [region], POLL_INTERVAL);
+  const insights = useApi(() => fetchInsights(), [], POLL_INTERVAL);
+  const fleet = useApi(() => fetchFleet(region || undefined, transportType || undefined), [region, transportType], POLL_INTERVAL);
 
   const anyLoading = overview.loading || deliveries.loading || incidents.loading || infra.loading || cost.loading || insights.loading || fleet.loading;
   const errors = [overview.error, deliveries.error, incidents.error, infra.error, cost.error, insights.error, fleet.error].filter(Boolean);
@@ -152,6 +155,13 @@ function App() {
                 )}
               </div>
             </div>
+
+            {incidents.data && incidents.data.incidents.length > 0 && (
+              <div className="panel globe-panel" style={{ marginBottom: 28 }}>
+                <div className="panel-title"><span className="icon">&#127758;</span> Global Incident Map</div>
+                <IncidentGlobe incidents={incidents.data.incidents} />
+              </div>
+            )}
 
             <div className="section-grid">
               <div className="panel">

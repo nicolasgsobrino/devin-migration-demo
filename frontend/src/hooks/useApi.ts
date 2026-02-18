@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 
 interface UseApiResult<T> {
   data: T | null;
@@ -6,35 +6,48 @@ interface UseApiResult<T> {
   error: string | null;
 }
 
-export function useApi<T>(fetcher: () => Promise<T>, deps: unknown[] = []): UseApiResult<T> {
+export function useApi<T>(fetcher: () => Promise<T>, deps: unknown[] = [], pollInterval?: number): UseApiResult<T> {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const fetcherRef = useRef(fetcher);
+  fetcherRef.current = fetcher;
 
-  useEffect(() => {
-    let cancelled = false;
-    setLoading(true);
-    setError(null);
+  const doFetch = useCallback((isInitial: boolean) => {
+    if (isInitial) {
+      setLoading(true);
+      setError(null);
+    }
 
-    fetcher()
+    fetcherRef.current()
       .then((result) => {
-        if (!cancelled) {
-          setData(result);
-          setLoading(false);
-        }
+        setData(result);
+        if (isInitial) setLoading(false);
       })
       .catch((err) => {
-        if (!cancelled) {
+        if (isInitial) {
           setError(err instanceof Error ? err.message : 'Unknown error');
           setLoading(false);
         }
       });
+  }, []);
+
+  useEffect(() => {
+    doFetch(true);
+
+    if (pollInterval && pollInterval > 0) {
+      intervalRef.current = setInterval(() => doFetch(false), pollInterval);
+    }
 
     return () => {
-      cancelled = true;
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, deps);
+  }, [...deps, pollInterval]);
 
   return { data, loading, error };
 }

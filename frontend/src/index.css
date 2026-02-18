@@ -1,27 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
-  --bg-primary: #0a0e1a;
-  --bg-secondary: #111827;
-  --bg-card: #1a1f35;
-  --bg-card-hover: #232847;
-  --border-color: #2a3050;
-  --text-primary: #e2e8f0;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  --accent-blue: #3b82f6;
-  --accent-cyan: #06b6d4;
-  --accent-purple: #8b5cf6;
-  --accent-green: #10b981;
-  --accent-yellow: #f59e0b;
-  --accent-red: #ef4444;
-  --accent-orange: #f97316;
-  --gradient-blue: linear-gradient(135deg, #3b82f6, #06b6d4);
-  --gradient-purple: linear-gradient(135deg, #8b5cf6, #3b82f6);
-  --gradient-green: linear-gradient(135deg, #10b981, #06b6d4);
-  --glow-blue: 0 0 20px rgba(59, 130, 246, 0.3);
-  --glow-cyan: 0 0 20px rgba(6, 182, 212, 0.3);
-  --glow-purple: 0 0 20px rgba(139, 92, 246, 0.3);
+  --bg-primary: #070b14;
+  --bg-secondary: #0d1220;
+  --bg-card: rgba(15, 20, 40, 0.85);
+  --bg-card-hover: rgba(25, 32, 60, 0.9);
+  --border-color: rgba(55, 65, 110, 0.35);
+  --text-primary: #eaf0f8;
+  --text-secondary: #a0b0c8;
+  --text-muted: #6878a0;
+  --accent-blue: #4e9fff;
+  --accent-cyan: #22d3ee;
+  --accent-purple: #a78bfa;
+  --accent-green: #34d399;
+  --accent-yellow: #fbbf24;
+  --accent-red: #f87171;
+  --accent-orange: #fb923c;
+  --gradient-blue: linear-gradient(135deg, #4e9fff, #22d3ee);
+  --gradient-purple: linear-gradient(135deg, #a78bfa, #4e9fff);
+  --gradient-green: linear-gradient(135deg, #34d399, #22d3ee);
+  --glow-blue: 0 0 24px rgba(78, 159, 255, 0.25);
+  --glow-cyan: 0 0 24px rgba(34, 211, 238, 0.25);
+  --glow-purple: 0 0 24px rgba(167, 139, 250, 0.25);
 }
 
 * {
@@ -31,11 +31,16 @@
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
   overflow-x: hidden;
+  font-size: 14px;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #root {
@@ -52,46 +57,61 @@ body {
   pointer-events: none;
   z-index: 0;
   background:
-    radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.4), transparent),
-    radial-gradient(1px 1px at 40% 70%, rgba(255,255,255,0.3), transparent),
-    radial-gradient(1px 1px at 60% 20%, rgba(255,255,255,0.5), transparent),
-    radial-gradient(1px 1px at 80% 60%, rgba(255,255,255,0.2), transparent),
-    radial-gradient(1.5px 1.5px at 10% 80%, rgba(59,130,246,0.4), transparent),
-    radial-gradient(1.5px 1.5px at 90% 10%, rgba(139,92,246,0.4), transparent),
-    radial-gradient(1px 1px at 50% 50%, rgba(6,182,212,0.3), transparent),
-    radial-gradient(1px 1px at 30% 90%, rgba(255,255,255,0.3), transparent),
-    radial-gradient(1px 1px at 70% 40%, rgba(255,255,255,0.2), transparent),
-    radial-gradient(1px 1px at 15% 55%, rgba(255,255,255,0.35), transparent),
-    radial-gradient(1px 1px at 85% 85%, rgba(255,255,255,0.25), transparent),
-    radial-gradient(1px 1px at 45% 15%, rgba(59,130,246,0.3), transparent),
-    radial-gradient(1px 1px at 75% 75%, rgba(139,92,246,0.3), transparent),
-    radial-gradient(1px 1px at 25% 45%, rgba(6,182,212,0.25), transparent),
-    radial-gradient(1px 1px at 55% 85%, rgba(255,255,255,0.3), transparent),
-    radial-gradient(1px 1px at 5% 25%, rgba(255,255,255,0.4), transparent),
-    radial-gradient(1px 1px at 95% 45%, rgba(255,255,255,0.2), transparent),
-    radial-gradient(1px 1px at 35% 65%, rgba(59,130,246,0.2), transparent);
+    radial-gradient(1.2px 1.2px at 20% 30%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(0.8px 0.8px at 40% 70%, rgba(255,255,255,0.35), transparent),
+    radial-gradient(1px 1px at 60% 20%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(0.6px 0.6px at 80% 60%, rgba(255,255,255,0.25), transparent),
+    radial-gradient(1.5px 1.5px at 10% 80%, rgba(78,159,255,0.45), transparent),
+    radial-gradient(1.5px 1.5px at 90% 10%, rgba(167,139,250,0.4), transparent),
+    radial-gradient(1px 1px at 50% 50%, rgba(34,211,238,0.35), transparent),
+    radial-gradient(0.8px 0.8px at 30% 90%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(0.6px 0.6px at 70% 40%, rgba(255,255,255,0.2), transparent),
+    radial-gradient(1px 1px at 15% 55%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(0.8px 0.8px at 85% 85%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1.2px 1.2px at 45% 15%, rgba(78,159,255,0.35), transparent),
+    radial-gradient(0.8px 0.8px at 75% 75%, rgba(167,139,250,0.3), transparent),
+    radial-gradient(1px 1px at 25% 45%, rgba(34,211,238,0.25), transparent),
+    radial-gradient(0.6px 0.6px at 55% 85%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1px 1px at 5% 25%, rgba(255,255,255,0.45), transparent),
+    radial-gradient(0.8px 0.8px at 95% 45%, rgba(255,255,255,0.2), transparent),
+    radial-gradient(1px 1px at 35% 65%, rgba(78,159,255,0.2), transparent);
+  animation: twinkle 8s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.85; }
+  50% { opacity: 1; }
+  100% { opacity: 0.9; }
 }
 
 .nebula-glow {
   position: fixed;
   top: -20%;
   right: -10%;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(139,92,246,0.08) 0%, rgba(59,130,246,0.04) 50%, transparent 70%);
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(167,139,250,0.1) 0%, rgba(78,159,255,0.05) 40%, transparent 70%);
   pointer-events: none;
   z-index: 0;
+  animation: nebulaDrift 20s ease-in-out infinite alternate;
 }
 
 .nebula-glow-2 {
   position: fixed;
   bottom: -20%;
   left: -10%;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(6,182,212,0.06) 0%, rgba(16,185,129,0.03) 50%, transparent 70%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(34,211,238,0.08) 0%, rgba(52,211,153,0.04) 40%, transparent 70%);
   pointer-events: none;
   z-index: 0;
+  animation: nebulaDrift 25s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes nebulaDrift {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -20px) scale(1.05); }
+  100% { transform: translate(-20px, 15px) scale(0.95); }
 }
 
 .app-container {
@@ -130,23 +150,25 @@ body {
 }
 
 .header h1 {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 22px;
-  font-weight: 600;
-  background: linear-gradient(135deg, #e2e8f0, #3b82f6);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #f0f4ff, #4e9fff, #a78bfa);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  letter-spacing: 0.08em;
 }
 
 .header h1 span {
   font-size: 12px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
   font-weight: 400;
   display: block;
   background: none;
   -webkit-text-fill-color: var(--text-muted);
-  margin-top: 2px;
+  margin-top: 4px;
+  letter-spacing: 0.06em;
 }
 
 .filters-bar {
@@ -158,14 +180,15 @@ body {
 
 .filter-select {
   background: var(--bg-card);
+  backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
   color: var(--text-primary);
-  padding: 8px 14px;
-  border-radius: 8px;
+  padding: 10px 16px;
+  border-radius: 10px;
   font-size: 13px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
   cursor: pointer;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
 }
 
 .filter-select:hover {
@@ -187,10 +210,11 @@ body {
 
 .kpi-card {
   background: var(--bg-card);
+  backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 20px;
-  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  border-radius: 14px;
+  padding: 22px;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
   position: relative;
   overflow: hidden;
 }
@@ -227,10 +251,11 @@ body {
 }
 
 .kpi-value {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 28px;
-  font-weight: 700;
+  font-family: 'JetBrains Mono', 'Space Grotesk', monospace;
+  font-size: 30px;
+  font-weight: 600;
   margin-bottom: 4px;
+  letter-spacing: -0.02em;
 }
 
 .kpi-value.blue { color: var(--accent-blue); }
@@ -267,10 +292,11 @@ body {
 
 .panel {
   background: var(--bg-card);
+  backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 20px;
-  transition: border-color 0.2s;
+  border-radius: 14px;
+  padding: 22px;
+  transition: border-color 0.25s, box-shadow 0.25s;
 }
 
 .panel:hover {
@@ -278,14 +304,15 @@ body {
 }
 
 .panel-title {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
   color: var(--text-primary);
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  letter-spacing: 0.02em;
 }
 
 .panel-title .icon {
@@ -375,10 +402,11 @@ body {
 }
 
 .region-tile .name {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 4px;
+  letter-spacing: 0.04em;
 }
 
 .region-tile .metric {
@@ -406,7 +434,8 @@ body {
 .data-table td {
   padding: 10px 12px;
   color: var(--text-secondary);
-  border-bottom: 1px solid rgba(42,48,80,0.5);
+  border-bottom: 1px solid rgba(42,48,80,0.35);
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
 }
 
 .data-table tr:hover td {
@@ -514,4 +543,144 @@ body {
   gap: 8px;
   font-size: 13px;
   color: var(--text-secondary);
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.globe-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.globe-panel {
+  overflow: visible;
+}
+
+.globe-tooltip {
+  position: fixed;
+  z-index: 1000;
+  background: rgba(10, 14, 30, 0.96);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(78, 159, 255, 0.3);
+  border-radius: 12px;
+  padding: 14px 18px;
+  min-width: 260px;
+  max-width: 360px;
+  pointer-events: none;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(78, 159, 255, 0.1);
+}
+
+.globe-tooltip-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+.globe-tooltip-row {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.globe-tooltip-label {
+  color: var(--text-muted);
+  margin-right: 6px;
+}
+
+.globe-tooltip-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-color);
+  line-height: 1.5;
+}
+
+.globe-tooltip-age {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.severity-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.severity-dot.critical { background: var(--accent-red); box-shadow: 0 0 8px rgba(248, 113, 113, 0.6); }
+.severity-dot.high { background: var(--accent-orange); box-shadow: 0 0 8px rgba(251, 146, 60, 0.5); }
+.severity-dot.medium { background: var(--accent-yellow); box-shadow: 0 0 8px rgba(251, 191, 36, 0.5); }
+.severity-dot.low { background: var(--accent-blue); box-shadow: 0 0 8px rgba(78, 159, 255, 0.5); }
+
+.severity-text { font-weight: 600; text-transform: capitalize; }
+.severity-text.critical { color: var(--accent-red); }
+.severity-text.high { color: var(--accent-orange); }
+.severity-text.medium { color: var(--accent-yellow); }
+.severity-text.low { color: var(--accent-blue); }
+
+.globe-legend {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 12px 0 4px;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.globe-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.legend-dot.critical { background: var(--accent-red); }
+.legend-dot.high { background: var(--accent-orange); }
+.legend-dot.medium { background: var(--accent-yellow); }
+.legend-dot.low { background: var(--accent-blue); }
+
+.legend-arc {
+  display: inline-block;
+  width: 20px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-red), var(--accent-orange));
+  border-radius: 1px;
+}
+
+.kpi-label {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.kpi-sub {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.insight-message {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+}
+
+.insight-badge {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.insight-category {
+  font-family: 'Space Grotesk', sans-serif;
 }
