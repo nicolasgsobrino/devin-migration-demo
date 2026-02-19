@@ -10,7 +10,9 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-COBOL_BIN = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'bin', 'legacy-backend')
+PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+JAVA_CLASS_DIR = os.path.join(PROJECT_DIR, 'java-backend', 'out')
+JAVA_MAIN_CLASS = 'com.banking.LegacyBackend'
 STATE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '.state')
 STATE_FILE = os.path.join(STATE_DIR, 'operations.log')
 
@@ -37,7 +39,7 @@ def append_state_op(op):
         f.write(op + '\n')
 
 
-def run_cobol(operations):
+def run_backend(operations):
     with tempfile.NamedTemporaryFile(mode='w', suffix='.dat', delete=False) as f:
         for op in operations:
             f.write(op + '\n')
@@ -45,7 +47,7 @@ def run_cobol(operations):
 
     try:
         result = subprocess.run(
-            [COBOL_BIN, tmp_path],
+            ['java', '-cp', JAVA_CLASS_DIR, JAVA_MAIN_CLASS, tmp_path],
             capture_output=True, text=True, timeout=30
         )
         output_lines = result.stdout.strip().split('\n') if result.stdout.strip() else []
@@ -62,7 +64,7 @@ def run_cobol(operations):
                 pass
         return responses
     except subprocess.TimeoutExpired:
-        return [{"status": "ERROR", "message": "COBOL backend timeout"}]
+        return [{"status": "ERROR", "message": "Java backend timeout"}]
     except Exception as e:
         return [{"status": "ERROR", "message": str(e)}]
     finally:
@@ -73,7 +75,7 @@ def run_with_state(operation, mutates=False):
     with state_lock:
         history = get_state_ops()
         all_ops = history + [operation]
-        results = run_cobol(all_ops)
+        results = run_backend(all_ops)
         target_result = results[len(history)] if len(results) > len(history) else (
             {"status": "ERROR", "message": "No response from backend"}
         )
@@ -92,7 +94,7 @@ def run_mutation(operation):
 
 @app.route('/api/health', methods=['GET'])
 def health():
-    return jsonify({"status": "OK", "service": "COBOL Banking API", "version": "2.0"})
+    return jsonify({"status": "OK", "service": "Java Banking API", "version": "3.0"})
 
 
 @app.route('/api/accounts', methods=['GET', 'POST'])
