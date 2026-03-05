@@ -4,23 +4,24 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 
-BIN="$PROJECT_DIR/bin/legacy-backend"
+JAVA_OUT="$PROJECT_DIR/java-backend/out"
+MAIN_CLASS="com.banking.LegacyBackend"
 INPUT="$PROJECT_DIR/data/input.dat"
 EXPECTED="$PROJECT_DIR/data/expected-output.txt"
 
-if [ ! -f "$BIN" ]; then
-    echo "Binary not found. Run ./scripts/build.sh first."
+if [ ! -d "$JAVA_OUT/com/banking" ]; then
+    echo "Java classes not found. Run ./scripts/build-java.sh first."
     exit 1
 fi
 
-ACTUAL=$("$BIN" "$INPUT" | sed 's/"created": "[^"]*"/"created": "TIMESTAMP"/g')
+ACTUAL=$(java -cp "$JAVA_OUT" "$MAIN_CLASS" "$INPUT" | sed 's/"created": "[^"]*"/"created": "TIMESTAMP"/g')
 EXPECTED_CONTENT=$(cat "$EXPECTED" | sed 's/"created": "[^"]*"/"created": "TIMESTAMP"/g')
 
 if [ "$ACTUAL" = "$EXPECTED_CONTENT" ]; then
-    echo "PASS: Output matches expected results."
+    echo "PASS: Java output matches expected results."
     exit 0
 else
-    echo "FAIL: Output does not match expected results."
+    echo "FAIL: Java output does not match expected results."
     echo ""
     echo "=== EXPECTED ==="
     echo "$EXPECTED_CONTENT"
